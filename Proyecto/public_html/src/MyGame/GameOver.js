@@ -11,7 +11,7 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function MyGame() {
+function GameOver() {
     this.kMinionSprite = "assets/minion_sprite.png";
     this.kPlatformTexture = "assets/platform.png";
     this.kWallTexture = "assets/wall.png";
@@ -33,22 +33,24 @@ function MyGame() {
     this.mAllDyePacks = new GameObjectSet();
     this.mAllParticles = new ParticleGameObjectSet();
 }
-gEngine.Core.inheritPrototype(MyGame, Scene);
+gEngine.Core.inheritPrototype(GameOver, Scene);
 
 MyGame.prototype.loadScene = function () {
-    //gEngine.Textures.loadTexture(this.kMinionSprite);
-    //gEngine.Textures.loadTexture(this.kPlatformTexture);
-    //gEngine.Textures.loadTexture(this.kWallTexture);
-    //gEngine.Textures.loadTexture(this.kDyePackTexture);
-    //gEngine.Textures.loadTexture(this.kParticleTexture);
+    gEngine.Textures.loadTexture(this.kMinionSprite);
+    gEngine.Textures.loadTexture(this.kPlatformTexture);
+    gEngine.Textures.loadTexture(this.kWallTexture);
+    gEngine.Textures.loadTexture(this.kDyePackTexture);
+    gEngine.Textures.loadTexture(this.kParticleTexture);
 };
 
 MyGame.prototype.unloadScene = function () {    
-    //gEngine.Textures.unloadTexture(this.kMinionSprite);
-    //gEngine.Textures.unloadTexture(this.kPlatformTexture);
-    //gEngine.Textures.unloadTexture(this.kWallTexture);
-    //gEngine.Textures.unloadTexture(this.kDyePackTexture);
-    //gEngine.Textures.unloadTexture(this.kParticleTexture);
+    gEngine.Textures.unloadTexture(this.kMinionSprite);
+    gEngine.Textures.unloadTexture(this.kPlatformTexture);
+    gEngine.Textures.unloadTexture(this.kWallTexture);
+    gEngine.Textures.unloadTexture(this.kDyePackTexture);
+    gEngine.Textures.unloadTexture(this.kParticleTexture);
+    var nextLevel = new MyGame();  // next level to be loaded
+    gEngine.Core.startScene(nextLevel);
 };
 
 MyGame.prototype.initialize = function () {
@@ -171,8 +173,11 @@ MyGame.prototype.update = function () {
     // physics simulation
     this._physicsSimulation();
     
-    this.mMsg.setText(this.kPrompt + " HeroLifesLeft: " + this.mHero.lifesLeft + ": DyePack=" + this.mAllDyePacks.size() +
-            " Particles=" + this.mAllParticles.size());
+    this.mMsg.setText("Left: A, Right: D, Up: W, Down: S, Fire Bombs: Left mouse button  |" + " HeroLifesLeft: " + this.mHero.lifesLeft + " | DyePack: " + this.mAllDyePacks.size());
+
+    if (this.mHero.lifesLeft === 0 ) {
+        gEngine.GameLoop.stop();
+    }
 };
 
 MyGame.prototype.createParticle = function(atX, atY) {

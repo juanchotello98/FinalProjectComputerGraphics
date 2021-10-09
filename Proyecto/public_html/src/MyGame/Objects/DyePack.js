@@ -10,7 +10,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function DyePack(texture, atX, atY) {
-    this.mCycleLeft = 300;
+    this.mCycleLeft = Math.random() * (300 - 50) + 50;
 
     this.mDyePack = new TextureRenderable(texture);
 
