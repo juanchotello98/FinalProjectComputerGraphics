@@ -173,9 +173,10 @@ MyGame.prototype.update = function () {
     // physics simulation
     this._physicsSimulation();
     
-    this.mMsg.setText("Left: A, Right: D, Up: W, Down: S, Fire Bombs: Left mouse button  |" + " HeroLifesLeft: " + this.mHero.lifesLeft + " | DyePack: " + this.mAllDyePacks.size());
+    this.mMsg.setText("Left: A, Right: D, Up: W, Down: S, Fire Bombs: Left mouse button  |" + 
+        " HeroLifesLeft: " + this.mHero.livesLeft + " | DyePack: " + this.mAllDyePacks.size());
 
-    if (this.mHero.lifesLeft === 0 ) {
+    if (this.mHero.livesLeft === 0 ) {  
         gEngine.GameLoop.stop();
     }
 };
