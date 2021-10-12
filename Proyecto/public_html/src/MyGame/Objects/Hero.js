@@ -12,7 +12,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function Hero(spriteTexture, atX, atY) {
-    this.lifesLeft = 5;
+    this.livesLeft = 5;
     this.kXDelta = 1;
     this.kYDelta = 2.0;
     this.mDye = new SpriteRenderable(spriteTexture);
@@ -60,7 +60,7 @@ Hero.prototype.update = function (dyePacks, allParticles, func) {
         if (obj.pixelTouches(this, collisionPt)) {
             dyePacks.removeFromSet(obj);
             allParticles.addEmitterAt(collisionPt, 200, func);
-            this.lifesLeft--;
+            this.livesLeft--;
         }
     }
 };

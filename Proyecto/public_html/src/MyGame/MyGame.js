@@ -171,7 +171,7 @@ MyGame.prototype.update = function () {
     // physics simulation
     this._physicsSimulation();
     
-    this.mMsg.setText(this.kPrompt + " HeroLifesLeft: " + this.mHero.lifesLeft + ": DyePack=" + this.mAllDyePacks.size() +
+    this.mMsg.setText(this.kPrompt + " HeroLifesLeft: " + this.mHero.livesLeft + ": DyePack=" + this.mAllDyePacks.size() +
             " Particles=" + this.mAllParticles.size());
 };
 
